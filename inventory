@@ -1,4 +1,4 @@
 [ubuntu]
-192.168.100.69 #ansible_ssh_user=coalubuntu
+192.168.100.69 apache_package=apache2 php_package=libapache2-mod-php #ansible_ssh_user=coalubuntu
 [centos]
-192.168.100.71 #ansible_ssh_user=pieromolina
+192.168.100.71 apache_package=httpd php_package=php #ansible_ssh_user=pieromolina
