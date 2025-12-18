@@ -1,5 +1,5 @@
 - name: Reload firewall
   service:
     name: "{{firewall_name}}"
-    state: reloaded
+    state: restarted
  # when: ansible_distribution == "CentOS"

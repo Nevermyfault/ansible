@@ -1,0 +1,9 @@
+- name: create directory for userfiles
+  file:
+    path: /home/"{{ansible_user}}"
+    state: absent
+
+#- name: copy user file to hosts
+#  copy:
+#    src: userfile
+#    dest: /home/{{ansible_user}}/testfolder/userfile

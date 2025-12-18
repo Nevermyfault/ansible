@@ -4,3 +4,5 @@ php_package_name: php
 firewall_name: firewalld
 ssh_users: ansibleadmin
 ssh_template_file: sshd_config_centos.j2
+test_template_file: test_template.j2
+var_number: "7"

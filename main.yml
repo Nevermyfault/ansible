@@ -22,11 +22,12 @@
   become: true
   roles:
     - base
-
+    - copy_module
 - hosts: workstations
   become: true
   roles:
     - workstations
+    - copy_module
 
 - hosts: webservers
   become: true

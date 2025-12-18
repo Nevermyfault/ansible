@@ -30,7 +30,10 @@
       tags: always
       authorized_key:
         user: ansibleadmin
-        key: "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINvzYdPJ21FCAEr9kM3Uw/68LcD8LGXnMun+nbKaDbgc ansible"
+        state: present
+        key: "{{ lookup('file', '~/.ssh/ansible.pub') }}"
+        #key: "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHiIW9j6PhUpxnrg9006tZGmhif/jQX7EpXkdYdjkde1 ansible"
+
 
     - name: add sudoers file for ansible user
       tags: always
