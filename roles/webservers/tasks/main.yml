@@ -1,18 +1,19 @@
-- name: install apache httpd and php packages
-  tags: always
+- name: install apache and php packages
+  tags: apache,httpd,php
   package:
     name:
-      - "{{ apache_package }}"
-      - "{{ php_package }}"
+      - "{{ apache_package_name }}"
+      - "{{ php_package_name }}"
     state: latest
     update_cache: yes
 
-- name: start and enable httpd (CentOS)
+- name: start and enable apache service
+  tags: apache,httpd
   service:
-    name: httpd
+    name: "{{apache_service}}"
     state: started
     enabled: yes
-  when: ansible_distribution == "CentOS"
+  #when: ansible_distribution == "CentOS"
 
 - name: open port 80/tcp for CentOS
   firewalld:
@@ -20,11 +21,18 @@
     permanent: yes
     state: enabled
   when: ansible_distribution == "CentOS"
-  #notify: Reload Firewalld
+  notify: Reload firewall
 
+- name:  open port 80/tcp for Ubuntu (ufw)
+  ufw:
+    rule: allow
+    port: "80"
+    proto: tcp
+  when: ansible_distribution == "Ubuntu"
+  notify: Reload firewall
 #handlers:
-- name: Reload Firewalld
-  service:
-    name: firewalld
-    state: reloaded
-  when: ansible_distribution == "CentOS"
+#- name: Reload Firewalld
+#  service:
+#    name: firewalld
+#    state: reloaded
+#  when: ansible_distribution == "CentOS"
