@@ -1,6 +1,5 @@
-[ubuntu]
+[webservers]
 192.168.100.69 apache_package=apache2 php_package=libapache2-mod-php #ansible_ssh_user=coalubuntu
-[centos]
 192.168.100.71 apache_package=httpd php_package=php #ansible_ssh_user=pieromolina
 [local]
-localhost ansible_connection=local
+127.0.0.1 ansible_connection=local

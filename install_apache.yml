@@ -2,6 +2,33 @@
 
 - hosts: all
   become: true
+  pre_tasks:
+
+  - name: update repo cache (CentOS)
+    tags: always
+    dnf:
+      update_cache: yes
+    changed_when: false
+    when: ansible_distribution == "CentOS"
+
+  - name: update repo cache (Ubuntu)
+    tags: always
+    apt:
+      update_cache: true
+    changed_when: false
+    when: ansible_distribution == "Ubuntu"
+
+- hosts: all
+  become: true
+  tasks:
+  - name: add ssh key for ansibleadmin
+    tags: always
+    authorized_key:
+      user: ansibleadmin
+      key: "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINvzYdPJ21FCAEr9kM3Uw/68LcD8LGXnMun+nbKaDbgc ansible"
+     #state: absent
+- hosts: webservers
+  become: true
   tasks:
 
   - name: install apache httpd and php packages
